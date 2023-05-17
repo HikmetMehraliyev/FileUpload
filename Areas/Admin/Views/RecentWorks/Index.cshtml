@@ -1,0 +1,63 @@
+﻿@model List<RecentWorks>
+
+@{
+    ViewData["Title"] = "RecentWorks";
+    int count = 1;
+}
+
+<div class="d-flex justify-content-end mb-2">
+    <a class="btn btn-success text-light" asp-area="Admin" asp-controller="RecentWorks" asp-action="Create">Create Member</a>
+</div>
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                Number
+                            </th>
+                            <th>
+                                Title
+                            </th>
+                            <th>
+                                Description
+                            </th>
+                            <th>
+                                Image
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (RecentWorks works in Model)
+                        {
+                            <tr>
+                                <td> @count</td>
+
+                                <td>
+                                    @works.Title
+                                </td>
+                                <td>
+                                    @works.Description
+                                </td>
+                                <td>
+                                    <img src="~/assets/img/@works.ImagePath" style="height:100px; width:100px;"></img>
+                                </td>
+                                <td>
+                                    <a class="btn btn-primary text-light">Detail</a>
+                                    <a class="btn btn-warning text-light" asp-area="Admin" asp-controller="RecentWorks" asp-action="Update" asp-route-Id="@works.Id">Update</a>
+                                    <a class="btn btn-danger text-light" asp-area="Admin" asp-controller="RecentWorks" asp-action="Delete" asp-route-Id="@works.Id">Delete</a>
+                                </td>
+                            </tr>
+                            count++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
